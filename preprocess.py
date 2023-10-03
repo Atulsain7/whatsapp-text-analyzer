@@ -10,10 +10,10 @@ def get_time_and_date(text):
     return text
 
 def get_string(text):
-    pass
+    return text.split('\n')[0]
 
 def preprocess(data):
-    pattern = 'd{1,2}/\d{1,2}/\d{2,4},\s\d{1,2}:\d{2}\s-\s'
+    pattern = '\d{1,2}/\d{1,2}/\d{2,4},\s\d{1,2}:\d{2}\s-\s'
     messages = re.split(pattern, data)[1:]
     dates = re.findall(pattern, data)
 
@@ -37,8 +37,16 @@ def preprocess(data):
             users.append('Group Notification')
             messages.append(entry[0])
     df['User'] = users
-    df['message'] = messages
-    df['message'] = df['message'].apply(lambda text: get_string(text))
+    df['Message'] = messages
+    df['Message'] = df['Message'].apply(lambda text: get_string(text))
     df.drop(columns=['user_messages'], axis=1)
+    df['Only Date'] = pd.to_datetime(df['date']).dt.date
+    df['Year'] = pd.to_datetime(df['date']).dt.year
+    df['Month'] = pd.to_datetime(df['date']).dt.month
+    df['Month Name'] = pd.to_datetime(df['date']).dt.month_name()
+    df['Day'] = pd.to_datetime(df['date']).dt.day
+    df['Day Name'] = pd.to_datetime(df['date']).dt.day_name()
+    df['Hour'] = pd.to_datetime(df['date']).dt.hour
+    df['Minute'] = pd.to_datetime(df['date']).dt.minute
     return df
 
