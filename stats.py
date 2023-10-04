@@ -82,7 +82,7 @@ def month_time_line(select_user, df):
         time.append(temp['Month'][i] + "-" + str(temp['Year'][i]))
 
     temp['Time'] = time
-    return time
+    return temp
 
 def week_activity_map(selected_user, df):
     if selected_user != 'Overall':
