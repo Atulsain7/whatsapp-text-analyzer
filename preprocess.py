@@ -1,11 +1,11 @@
 import re
 import pandas as pd
-from app import data
 
 
 def get_time_and_date(text):
     date, time= text.split(',')
     date = date.replace(',', "")
+    time = time.replace('-', "")
     text = date.strip() + " " + time.strip()
     return text
 
