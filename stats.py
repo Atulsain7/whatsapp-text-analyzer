@@ -79,7 +79,7 @@ def month_time_line(select_user, df):
 
     time = []
     for i in range(temp.shape[0]):
-        time.append(temp['Month'][i] + "-" + str(temp['Year'][i]))
+        time.append(str(temp['Month'][i]) + "-" + str(temp['Year'][i]))
 
     temp['Time'] = time
     return temp
